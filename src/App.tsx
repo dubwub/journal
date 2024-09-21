@@ -5,9 +5,11 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 import { feelings_wheel, flat_emotions, base_emotions, color_map } from './utils/feelings-wheel';
-import { Button, Input, TextInput } from '@mantine/core';
+import { Button, Input, Tabs, TextInput } from '@mantine/core';
+import { getHotkeyHandler } from '@mantine/hooks';
 
 function App() {
+
   const [activeEmotions, setActiveEmotions] = useState<string[]>([]);
   const form = useForm({
     mode: 'uncontrolled',
@@ -43,41 +45,51 @@ function App() {
     setActiveEmotions(activeEmotions.filter((_emotion: string) => emotion !== _emotion))
   }
 
+  const [journalInput, setJournalInput] = useState("")
+  const [journal, setJournal] = useState<any[]>([])
+  function submit() {
+    setJournal([...journal, journalInput]);
+  }
+
   return (
     <>
-      {/* <TextInput
-        label="Test"
-        placeholder="Test"
-        key={form.key('test')}
-        {...form.getInputProps('test')}
-      />
-      <Button
-          onClick={() =>
-            form.setValues({
-              test: ,
-              email: `${randomId()}@test.com`,
-            })
-          }
-        >
-          Set random values
-        </Button> */}
+      <Tabs>
+        <Tabs.List>
+          <Tabs.Tab value="journaltest">Journal (test)</Tabs.Tab>
+          <Tabs.Tab value="feelingswheeltest">Feelings Wheel (test)</Tabs.Tab>
+        </Tabs.List>
+        <Tabs.Panel value="journaltest">
+          <>
+            <TextInput 
+                onKeyDown={getHotkeyHandler([
+                  ['Enter', submit],
+                ])}
+                onChange={(e) => setJournalInput(e.target.value)}
+            ></TextInput>
+            {JSON.stringify(journal)}
+          </>
+        </Tabs.Panel>
+        <Tabs.Panel value="feelingswheeltest">
+          <>
+            {
+              activeEmotions.map((_emotion) => {
+                let emotion = color_map[_emotion]
+                return <Button 
+                  color={emotion.background}
+                  style={{color: emotion.textColor}}
+                  onClick={()=>removeEmotion(emotion.emotion)}>{emotion.emotion}</Button>  
+              })
+            }
+            <br/> <br/>
 
-      {
-        activeEmotions.map((_emotion) => {
-          let emotion = color_map[_emotion]
-          return <Button 
-            color={emotion.background}
-            style={{color: emotion.textColor}}
-            onClick={()=>removeEmotion(emotion.emotion)}>{emotion.emotion}</Button>  
-        })
-      }
-      <br/> <br/>
-
-      {
-        suggestedEmotions.map((emotion) => {
-          return <Button color={emotion.background} style={{color: emotion.textColor}} onClick={()=>addEmotion(emotion.emotion)}>{emotion.emotion}</Button>  
-        })
-      }
+            {
+              suggestedEmotions.map((emotion) => {
+                return <Button color={emotion.background} style={{color: emotion.textColor}} onClick={()=>addEmotion(emotion.emotion)}>{emotion.emotion}</Button>  
+              })
+            }
+          </>
+        </Tabs.Panel>
+      </Tabs>
     </>
   )
 }
