@@ -1,46 +1,9 @@
-<h1 align="center">⚡ Quick Start Project with Vite.js + MERN Stack 🌱</h1> 
-
-<p align="center">
-  <img src="https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white" alt="vite.js">
-  <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="react">
-  <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="typescript">
-  <img src="https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white" alt="sass">
-  <img src="https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white" alt="bootsrap">
-</p>
-<p align="center">
-  <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" alt="node.js">
-  <img src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB" alt="express.js">
-  <img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white" alt="mongodb">
-</p>
-<br/>
-<p align="center">
-   <a href="/README.md"><img src="https://img.shields.io/badge/README-es-red" alt="readme es"></a>
-   <a href="/README.fr.md"><img src="https://img.shields.io/badge/README-fr-blue" alt="readme fr"></a>
-</p>
-
-
-## Table of Contents
-
-- [🛠️ Installation](#%EF%B8%8F-installation)
-  - [Step 1: Clone the Github repository](#step-1-clone-the-github-repository)
-  - [Step 2: Install dependencies](#step-2-install-dependencies)
-  - [Step 3: Configure the server part](#step-3-configure-the-server-part)  
-- [💻 Usage](#-usage)
-- [🔩 List of Dependencies](#-list-of-dependencies)
-- [🔑 License](#-license)
-- [💡 Contribution](#-contribution)
-- [💖 Support the Project](#-support-the-project)
+<h1 align="center">Journal</h1> 
 
 ## 🛠️ Installation
 
-### Step 1: Clone the Github repository
-
-- Open your development directory to clone the Github repository:
-   ```css
-   git clone https://github.com/ToxyhDev/vitejs-stack-mern-quickstart.git
-   ```
-
-### Step 2: Install dependencies
+### Step 1: Install dependencies
+  Note: is nodemon installed? I had to run `yarn global add nodemon`
 
 - Go to the **root directory** of the project:
    ```shell
@@ -49,8 +12,6 @@
   - Install global dependencies of the project:
 
      ```shell
-     # With NPM:
-     npm install
      # With Yarn:
      yarn
      ```
@@ -62,8 +23,6 @@
    - Install client-side dependencies:
 
      ```shell
-     # With NPM:
-     npm install
      # With Yarn:
      yarn
      ```
@@ -75,8 +34,6 @@
    - Install server-side dependencies:
     
      ```shell
-     # With NPM:
-     npm install
      # With Yarn:
      yarn
      ```
@@ -86,7 +43,7 @@
 >
 >If you don't want to connect your database immediately, you can skip to [💻 Usage](#-usage)
 
-9. Create a file named .env and register MongoDB API key:
+9. Create a file named .env in `/server/.env` and register MongoDB API key:
     
    ```env
    ATLAS_URI=mongodb+srv://<username>:<password>@<cluster>/?retryWrites=true&w=majority
