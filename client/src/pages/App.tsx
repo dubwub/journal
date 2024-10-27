@@ -2,32 +2,58 @@ import { useState } from 'react'
 import reactLogo from '../assets/react.svg'
 import viteLogo from '/vite.svg'
 // import './App.css'
+import { Button, Checkbox, Group, TextInput } from '@mantine/core';
+import { useForm } from '@mantine/form';
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const form = useForm({
+    mode: 'uncontrolled',
+    initialValues: {
+      id: '',
+      title: '',
+      body: '',
+    },
+  });
+
+  async function onSubmit(values: any) {
+    const response = await fetch("http://localhost:5050/note", 
+      {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      }
+    )
+    console.log(response.json());
+  }
+  
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <form onSubmit={
+        form.onSubmit((values) => {
+          console.log(values)
+          onSubmit(values);
+        })
+      }>
+        <TextInput
+          key={form.key('id')}
+          {...form.getInputProps('id')}
+        />
+        <TextInput
+          key={form.key('title')}
+          {...form.getInputProps('title')}
+        />
+        <TextInput
+          key={form.key('body')}
+          {...form.getInputProps('body')}
+        />
+        <Group justify="flex-end" mt="md">
+          <Button type="submit">Submit</Button>
+        </Group>
+      </form>
     </>
   )
 }

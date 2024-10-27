@@ -6,12 +6,13 @@ import './db/conn.mjs'
 import notes from './models/note.js'
 
 const router = express.Router();
-router.route("/note").get(function(req, res) {
-  notes.insertMany([
+router.route("/note").put(function(req, res) {
+  console.log(req.body);
+  notes.create([
     {
-      id: "0",
-      title: "test",
-      body: "body",
+      id: req.body.id,
+      title: req.body.title,
+      body: req.body.body,
     }
   ])
   res.json('nice!')
