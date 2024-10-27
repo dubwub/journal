@@ -17,6 +17,18 @@ router.route("/note").put(function(req, res) {
   ])
   res.json('nice!')
 });
+router.route("/note").get(function(req, res) {
+  notes.find({}).then(function(notes) {
+    var noteMap = {};
+
+    notes.forEach(function(note) {
+      noteMap[note._id] = note;
+    });
+
+    res.send(noteMap);
+  });
+});
+
 
 const PORT = process.env.PORT || 5050
 const app = express()

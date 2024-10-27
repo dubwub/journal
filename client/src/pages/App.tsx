@@ -18,6 +18,17 @@ function App() {
     },
   });
 
+  async function getAllNotes() {
+    const response = await fetch("http://localhost:5050/note", 
+      {
+        method: "GET",
+      }
+    )
+    console.log(response.json());
+  }
+
+  getAllNotes();
+
   async function onSubmit(values: any) {
     const response = await fetch("http://localhost:5050/note", 
       {
