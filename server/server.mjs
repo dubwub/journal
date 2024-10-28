@@ -20,13 +20,14 @@ router.route("/note").put(function(req, res) {
 
 // edit existing note
 router.route("/note").post(function(req, res) {
+  console.log(req.body);
   notes.findByIdAndUpdate(req.body._id,
     {
       title: req.body.title,
-      body: req.body.body,
     }
-  )
-  res.json('nice!')
+  ).then((value) => {
+    res.json('nice!')
+  })
 });
 
 // get all notes

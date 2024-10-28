@@ -33,7 +33,43 @@ function App() {
     });
   }
 
+  async function editNoteById(id: string, title: string, body: string) {
+    let fetchBody: any = {
+      _id: id,
+      title: title,
+      body: body,
+    };
+    console.log(fetchBody);
+    const response = await fetch("http://localhost:5050/note", 
+      {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fetchBody),
+      }
+    ).then((value) => {
+      console.log(value);
+      getAllNotes();
+    })
+  }
+
+  let noteDisplay = <></>;
   if (typeof noteMap === "undefined") getAllNotes();
+  else {
+    let _noteDisplay = [];
+    for (const [key, value] of Object.entries(noteMap)) {
+      _noteDisplay.push(<>
+        <TextInput value={value.title} onChange={(e: any) => {
+          editNoteById(key, "potato", value.body)
+        }}></TextInput>
+        <TextInput value={value.body}></TextInput>
+      </>);
+    }
+    noteDisplay = <>
+      {
+       _noteDisplay 
+      }
+    </>
+  }
 
   async function onSubmit(values: any) {
     const response = await fetch("http://localhost:5050/note", 
@@ -49,6 +85,7 @@ function App() {
 
   return (
     <>
+      {noteDisplay}
       <form onSubmit={
         form.onSubmit((values) => {
           console.log(values)
