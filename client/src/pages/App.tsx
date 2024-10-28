@@ -9,6 +9,8 @@ import { useForm } from '@mantine/form';
 
 function App() {
 
+  const [noteMap, setNoteMap] = useState<any>(undefined);
+
   const form = useForm({
     mode: 'uncontrolled',
     initialValues: {
@@ -24,10 +26,14 @@ function App() {
         method: "GET",
       }
     )
-    console.log(response.json());
+    
+    const text = response.json().then((value) => {
+      setNoteMap(value);
+      console.log(value);
+    });
   }
 
-  getAllNotes();
+  if (typeof noteMap === "undefined") getAllNotes();
 
   async function onSubmit(values: any) {
     const response = await fetch("http://localhost:5050/note", 

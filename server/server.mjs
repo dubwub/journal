@@ -6,17 +6,30 @@ import './db/conn.mjs'
 import notes from './models/note.js'
 
 const router = express.Router();
+
+// put new note
 router.route("/note").put(function(req, res) {
-  console.log(req.body);
   notes.create([
     {
-      id: req.body.id,
       title: req.body.title,
       body: req.body.body,
     }
   ])
   res.json('nice!')
 });
+
+// edit existing note
+router.route("/note").post(function(req, res) {
+  notes.findByIdAndUpdate(req.body._id,
+    {
+      title: req.body.title,
+      body: req.body.body,
+    }
+  )
+  res.json('nice!')
+});
+
+// get all notes
 router.route("/note").get(function(req, res) {
   notes.find({}).then(function(notes) {
     var noteMap = {};
